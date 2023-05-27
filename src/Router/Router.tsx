@@ -1,4 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
+import { Login } from "../Pages"
 
 export const Router = () => {
     return (
@@ -6,7 +7,7 @@ export const Router = () => {
             <Routes>
                 <Route
                     path="/"
-                    element={<>Login</>} />
+                    element={<Login />} />
 
                 <Route
                     path="/dashboard"
