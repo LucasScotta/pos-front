@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { UserInfo } from "../../Models"
-import { getLocalData, setAndPersistData, removeLocalData } from "../../helper"
-import { EmptyUserState, localStorageKey } from "./state.helper"
+import { getLocalData, setAndPersistData, removeLocalData, localDataTokens } from "../../helper"
 
-
+// default user State
+export const EmptyUserState: UserInfo = { name: '' }
 
 export const userSlice = createSlice({
-    name: localStorageKey.user,
-    initialState: getLocalData(localStorageKey.user, EmptyUserState),
+    name: localDataTokens.user,
+    initialState: getLocalData(localDataTokens.user, EmptyUserState),
     reducers: {
         /**
          * Init user state on Login
@@ -16,7 +16,7 @@ export const userSlice = createSlice({
          * @returns {UserInfo}
          */
         createUser: (_state, action): UserInfo => {
-            setAndPersistData(localStorageKey.user, action.payload)
+            setAndPersistData(localDataTokens.user, action.payload)
             return action.payload
         },
         /**
@@ -24,7 +24,7 @@ export const userSlice = createSlice({
          * @returns {UserInfo}
          */
         resetUser: (): UserInfo => {
-            removeLocalData(localStorageKey.user)
+            removeLocalData(localDataTokens.user)
             return EmptyUserState
         },
     },

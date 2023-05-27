@@ -34,3 +34,8 @@ export const removeLocalData = (token: string) => {
     localStorage.removeItem(token)
 
 }
+
+export const localDataTokens = {
+    jwt: 'JWT_TOKEN',
+    user: 'user'
+}
