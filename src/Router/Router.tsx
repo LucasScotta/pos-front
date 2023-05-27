@@ -2,14 +2,14 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 import { Dashboard, Login } from "../Pages"
 import { Provider } from "react-redux"
 import store from '../Provider/store'
-import { AuthGuard, NoAuth } from "../Guards"
+import { AuthGuard, NoAuthGuard } from "../Guards"
 export const Router = () => {
     return (
         <Provider store={store}>
             <BrowserRouter>
                 <Routes>
 
-                    <Route element={<NoAuth />}>
+                    <Route element={<NoAuthGuard />}>
                         <Route
                             path="/"
                             element={<Login />} />
