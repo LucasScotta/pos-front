@@ -1,5 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
-import { Login } from "../Pages"
+import { Dashboard, Login } from "../Pages"
 
 export const Router = () => {
     return (
@@ -11,7 +11,7 @@ export const Router = () => {
 
                 <Route
                     path="/dashboard"
-                    element={<>Dashboard</>} />
+                    element={<Dashboard />} />
 
                 <Route path="/*"
                     element={<Navigate to="/" />} />
