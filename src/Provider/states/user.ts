@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { UserInfo } from "../../Models"
-import { getInitialState } from "./helpers"
+import { getInitialState, setAndPersistData } from "./helpers"
 import { removeState } from "./helpers"
 
 const localStorageKey = {
@@ -18,6 +18,7 @@ export const userSlice = createSlice({
          * @returns {UserInfo}
          */
         createUser: (_state, action): UserInfo => {
+            setAndPersistData(localStorageKey.user, action.payload)
             return action.payload
         },
         /**

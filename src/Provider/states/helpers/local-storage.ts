@@ -4,7 +4,7 @@ import { UserInfo } from "../../../Models"
 const EmptyUserState: UserInfo = { name: '' }
 
 /**
- * Searches user records on local storage
+ * Searches user records from local storage
  * @param token LocalStorage identifier
  * @returns {UserInfo}
  */
@@ -15,9 +15,17 @@ export const getInitialState = (token: string): UserInfo => {
     }
     return EmptyUserState
 }
-
 /**
- * Removes user records on local storage
+ * Updates user record from local storage
+ * @param token
+ * @param user
+ */
+export const setAndPersistData = (token: string, user: UserInfo) => {
+    const data = JSON.stringify(user)
+    localStorage.setItem(token, data)
+}
+/**
+ * Removes user record from local storage
  * @param token LocalStorage identifier
  * @returns {UserInfo}
  */
