@@ -4,7 +4,7 @@ export const Login = () => {
     const [error, setError] = useState('')
     const submitLogin = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        const form = e.target as HTMLFormElement
+        const form = e.currentTarget
         const formData = new FormData(form)
         const user = formData.get('user')
         const password = formData.get('password')
