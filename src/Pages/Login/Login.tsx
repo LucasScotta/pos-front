@@ -1,24 +1,34 @@
 import { FormEvent, useState } from "react"
+import { login } from "../../Services"
+import { useDispatch } from "react-redux"
+import { createUser } from "../../Provider/states/user"
 
 export const Login = () => {
     const [error, setError] = useState('')
-    const submitLogin = (e: FormEvent<HTMLFormElement>) => {
+    const dispatch = useDispatch()
+    const submit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+
         const form = e.currentTarget
         const formData = new FormData(form)
         const user = formData.get('user')
         const password = formData.get('password')
+
         if (!!user && !!password) {
             setError('Loging in...')
-            // Logear
+
+            const data = await login(user, password)
+            if (data instanceof Error) {
+                return setError(data.message)
+            }
+            dispatch(createUser(data))
+            return
         }
-        else {
-            setError("Provided credentials are invalids")
-            // Mostrar error
-        }
+        setError("Provided credentials are invalids")
     }
+
     return (
-        <form onSubmit={submitLogin}>
+        <form onSubmit={submit}>
             {!!error && error}
             <input type="text" name="user" placeholder="username" />
             <input type="password" name="password" placeholder="password" />
