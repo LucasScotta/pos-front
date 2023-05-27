@@ -5,5 +5,5 @@ import { path } from "../../helper"
 
 export const NoAuth = () => {
     const user = useSelector((store: AppStore) => store.user)
-    return !!user && <Navigate to={path.DASHBOARD} /> || <Outlet />
+    return !!user.name && <Navigate to={path.DASHBOARD} /> || <Outlet />
 }
