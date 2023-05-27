@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { generateUrl, Urls } from '../helpers'
+import { generateUrl, serviceUrls } from '../helpers'
 import { UserInfo } from '../../Models'
 
 /**
@@ -11,7 +11,7 @@ import { UserInfo } from '../../Models'
 export const login = async (
     name: FormDataEntryValue,
     password: FormDataEntryValue): Promise<UserInfo | Error> => {
-    const url = generateUrl(Urls.base, Urls.login)
+    const url = generateUrl(serviceUrls.base, serviceUrls.login)
     try {
         const { data } = await axios.post(url, { name, password })
         return { name: data.name }
