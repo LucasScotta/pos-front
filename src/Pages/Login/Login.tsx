@@ -21,8 +21,7 @@ export const Login = () => {
             if (data instanceof Error) {
                 return setError(data.message)
             }
-            dispatch(createUser(data))
-            return
+            return dispatch(createUser(data))
         }
         setError("Provided credentials are invalids")
     }

@@ -3,7 +3,7 @@ import { UserInfo } from "../../Models"
 import { getLocalData, setAndPersistData, removeLocalData, localDataTokens } from "../../helper"
 
 // default user State
-export const EmptyUserState: UserInfo = { name: '' }
+export const EmptyUserState: UserInfo = { id: -1, name: '' }
 
 export const userSlice = createSlice({
     name: localDataTokens.user,

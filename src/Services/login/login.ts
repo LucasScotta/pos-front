@@ -14,7 +14,8 @@ export const login = async (
     const url = generateUrl(serviceUrls.base, serviceUrls.login)
     try {
         const { data } = await axios.post(url, { name, password })
-        return { name: data.name }
+        const { user } = data
+        return user
     }
     catch (err) {
         if (axios.isAxiosError(err)) {
