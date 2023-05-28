@@ -16,6 +16,7 @@ export const jwtInterceptor = () => {
         const token = getLocalData(localDataTokens.jwt, '')
         const url = request.url
         const urlIsLogin = url?.toString().includes(serviceUrls.login)
+        request.headers.Authorization = `Bearer ${token}`
         if (!!token) {
             if (!urlIsLogin) {
                 request.headers.Authorization = `Bearer ${token}`
