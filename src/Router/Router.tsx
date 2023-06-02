@@ -19,14 +19,17 @@ export const Router = () => {
                         <Route
                             path="/dashboard"
                             element={<Dashboard />} />
+
+                        <Route element={<AdminGuard />}>
+                            <Route
+                                path="/admin"
+                                element={<Admin />} />
+                        </Route>
                     </Route>
 
                     <Route path="/*"
                         element={<Navigate to="/" />} />
 
-                    <Route element={<AdminGuard />}>
-                        <Route path="/admin" element={<Admin />} />
-                    </Route>
                 </Routes>
             </BrowserRouter>
         </Provider>
