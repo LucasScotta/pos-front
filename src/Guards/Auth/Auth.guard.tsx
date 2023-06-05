@@ -5,5 +5,5 @@ import { path } from "../../helper"
 
 export const AuthGuard = () => {
     const user = useSelector((store: AppStore) => store.user)
-    return !!user.name && <Outlet /> || <Navigate to={path.HOME} />
+    return !!user.username && <Outlet /> || <Navigate to={path.HOME} />
 }

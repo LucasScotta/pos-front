@@ -4,16 +4,16 @@ import { UserInfo } from '../../Models'
 
 /**
  * login Promise function
- * @param name 
+ * @param username 
  * @param password 
  * @returns 
  */
 export const login = async (
-    name: FormDataEntryValue,
+    username: FormDataEntryValue,
     password: FormDataEntryValue): Promise<UserInfo | Error> => {
     const url = generateUrl(serviceUrls.base, serviceUrls.login)
     try {
-        const { data } = await axios.post(url, { name, password })
+        const { data } = await axios.post(url, { username, password })
         const { user } = data
         return user
     }

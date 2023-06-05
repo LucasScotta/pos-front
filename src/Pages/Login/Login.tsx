@@ -11,13 +11,13 @@ export const Login = () => {
 
         const form = e.currentTarget
         const formData = new FormData(form)
-        const user = formData.get('user')
+        const username = formData.get('username')
         const password = formData.get('password')
 
-        if (!!user && !!password) {
+        if (!!username && !!password) {
             setError('Loging in...')
 
-            const data = await login(user, password)
+            const data = await login(username, password)
             if (data instanceof Error) {
                 return setError(data.message)
             }
@@ -29,7 +29,7 @@ export const Login = () => {
     return (
         <form onSubmit={submit}>
             {!!error && error}
-            <input type="text" name="user" placeholder="username" />
+            <input type="text" name="username" placeholder="username" />
             <input type="password" name="password" placeholder="password" />
             <input type="submit" value="Log-in" />
         </form>

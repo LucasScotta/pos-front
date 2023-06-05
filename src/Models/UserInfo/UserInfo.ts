@@ -1,6 +1,6 @@
 type RolType = 'waiter' | 'chef' | 'admin'
 export interface UserInfo {
     id: number
-    name: string
+    username: string
     rol: RolType
 }
