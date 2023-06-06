@@ -1,5 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
-import { Admin, Dashboard, Login } from "../Pages"
+import { Admin, Dashboard, Login, Logout } from "../Pages"
 import { Provider } from "react-redux"
 import store from '../Provider/store'
 import { AdminGuard, AuthGuard } from "../Guards"
@@ -16,6 +16,9 @@ export const Router = () => {
                     <Route
                         path={path.LOGIN}
                         element={<Login />} />
+                    <Route
+                        path={path.LOGOUT}
+                        element={<Logout />} />
                     <Route element={<AuthGuard />}>
                         <Route
                             path={path.DASHBOARD}
