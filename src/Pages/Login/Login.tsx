@@ -6,6 +6,8 @@ import { createUser } from "../../Provider/states/user"
 export const Login = () => {
     const [error, setError] = useState('')
     const dispatch = useDispatch()
+    const { user } = useUser()
+
     const submit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 

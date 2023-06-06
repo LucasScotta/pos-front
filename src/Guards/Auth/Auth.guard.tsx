@@ -1,9 +1,8 @@
-import { useSelector } from "react-redux"
-import { AppStore } from "../../Models"
 import { Navigate, Outlet } from "react-router-dom"
 import { path } from "../../helper"
+import { useUser } from "../../Hooks"
 
 export const AuthGuard = () => {
-    const user = useSelector((store: AppStore) => store.user)
-    return !!user.username && <Outlet /> || <Navigate to={path.HOME} />
+    const { user } = useUser()
+    return !!user && !!user.username && <Outlet /> || <Navigate to={path.HOME} />
 }
