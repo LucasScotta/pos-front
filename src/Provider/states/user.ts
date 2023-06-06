@@ -25,6 +25,7 @@ export const userSlice = createSlice({
          */
         resetUser: (): UserInfo => {
             removeLocalData(localDataTokens.user)
+            removeLocalData(localDataTokens.jwt)
             return EmptyUserState
         },
     },
