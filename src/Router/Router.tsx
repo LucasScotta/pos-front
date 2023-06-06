@@ -3,6 +3,7 @@ import { Admin, Dashboard, Login } from "../Pages"
 import { Provider } from "react-redux"
 import store from '../Provider/store'
 import { AdminGuard, AuthGuard } from "../Guards"
+import { path } from "../helper"
 export const Router = () => {
     return (
         <Provider store={store}>
@@ -10,19 +11,19 @@ export const Router = () => {
                 <Routes>
 
                     <Route
-                        path="/"
+                        path={path.HOME}
                         element={<Login />} />
                     <Route
-                        path="/login"
+                        path={path.LOGIN}
                         element={<Login />} />
                     <Route element={<AuthGuard />}>
                         <Route
-                            path="/dashboard"
+                            path={path.DASHBOARD}
                             element={<Dashboard />} />
 
                         <Route element={<AdminGuard />}>
                             <Route
-                                path="/admin"
+                                path={path.ADMIN}
                                 element={<Admin />} />
                         </Route>
                     </Route>
