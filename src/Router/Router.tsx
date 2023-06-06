@@ -12,7 +12,9 @@ export const Router = () => {
                     <Route
                         path="/"
                         element={<Login />} />
-
+                    <Route
+                        path="/login"
+                        element={<Login />} />
                     <Route element={<AuthGuard />}>
                         <Route
                             path="/dashboard"
