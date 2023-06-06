@@ -15,7 +15,7 @@ export const jwtInterceptor = () => {
     axios.interceptors.request.use(request => {
         const token = getLocalData(localDataTokens.jwt, '')
         const url = request.url
-        const urlIsLogin = url?.toString().includes(serviceUrls.login)
+        const urlIsLogin = url?.toString().includes(serviceUrls.LOGIN)
         if (!!token) {
             if (!urlIsLogin) {
                 request.headers.Authorization = `Bearer ${token}`
