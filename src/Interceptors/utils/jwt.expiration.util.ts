@@ -1,3 +1,4 @@
+import { serviceUrls } from "../../Services"
 import { getLocalData, localDataTokens, removeLocalData } from "../../helper"
 
 export const isExpired = () => {
@@ -12,6 +13,11 @@ export const getSession = () => {
     const exp = getExpirationTime()
     return { token, exp }
 }
+const { LOGIN, REFRESH } = serviceUrls
+
+export const { refreshPath } = serviceUrls
+export const isLogin = (url: string | undefined) => url?.toString().includes(LOGIN)
+export const isRefresh = (url: string | undefined) => url?.toString().includes(REFRESH)
 export const removeSession = () => {
     removeLocalData(localDataTokens.jwt)
     removeLocalData(localDataTokens.user)

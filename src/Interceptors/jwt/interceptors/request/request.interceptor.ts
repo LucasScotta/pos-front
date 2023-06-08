@@ -1,14 +1,11 @@
 import axios, { InternalAxiosRequestConfig } from "axios"
-import { serviceUrls } from "../../../../Services"
-import { getSession, hasToRefresh, isExpired, isSession, removeSession } from "../../../utils"
+import { getSession, hasToRefresh, isExpired, isLogin, isRefresh, isSession, removeSession, refreshPath } from "../../../utils"
 
 
 export const requestInterceptor = async (request: InternalAxiosRequestConfig) => {
     const url = request.url
-    const urlIsLogin = url?.toString().includes(serviceUrls.LOGIN)
-    const urlIsRefreshing = url?.toString().includes(serviceUrls.REFRESH)
-    if (!!urlIsRefreshing) return request
-    if (!!urlIsLogin) {
+    if (isRefresh(url)) return request
+    if (isLogin(url)) {
         removeSession()
         return request
     }
@@ -21,7 +18,7 @@ export const requestInterceptor = async (request: InternalAxiosRequestConfig) =>
     request.headers.Authorization = tokenStr
     if (hasToRefresh(exp)) {
         const headers = { Authorization: tokenStr }
-        axios.get('http://localhost:8080/auth/refresh', { headers })
+        axios.get(refreshPath(), { headers })
     }
     return request
 }
