@@ -1,15 +1,10 @@
-import { UserInfo } from "../../Models"
-
-
 /**
  * Searches user records from local storage
  * @param token LocalStorage identifier
- * @param defaultValue Generic {String | UserInfo}
+ * @param defaultValue Generic
  * @returns {UserInfo || string}
  */
-export function getLocalData(token: string, defaultValue: string): string
-export function getLocalData(token: string, defaultValue: UserInfo): UserInfo
-export function getLocalData(token: string, defaultValue: any) {
+export function getLocalData<T>(token: string, defaultValue: T): T {
     const user = localStorage.getItem(token)
     return !!user ? JSON.parse(user) : defaultValue
 }
@@ -18,9 +13,7 @@ export function getLocalData(token: string, defaultValue: any) {
  * @param token
  * @param data generic {string | UserInfo}
  */
-export function setAndPersistData(token: string, data: string): void
-export function setAndPersistData(token: string, data: UserInfo): void
-export function setAndPersistData(token: string, data: any): void {
+export function setAndPersistData<T>(token: string, data: T): void {
     const parsed = JSON.stringify(data)
     localStorage.setItem(token, parsed)
 }
@@ -37,5 +30,6 @@ export const removeLocalData = (token: string) => {
 
 export const localDataTokens = {
     jwt: 'JWT_TOKEN',
-    user: 'user'
+    user: 'user',
+    exp: 'exp'
 }
