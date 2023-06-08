@@ -4,7 +4,8 @@ export const serviceUrls = {
     BASE: 'http://localhost:8080',
     LOGIN: 'auth',
     ADMIN: 'admin',
-    EMPLOYEES: 'users'
+    EMPLOYEES: 'users',
+    REFRESH: 'auth/refresh',
 }
 
 export const serviceMethods: AxiosServiceMethods = {
