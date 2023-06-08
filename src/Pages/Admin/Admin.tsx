@@ -1,6 +1,5 @@
 import { useUser } from "../../Hooks"
-import { UserCreation } from "./UserCreation"
-import { EmployeesList } from "./EmployeesList"
+import { UserCreation, ProductCreation, EmployeesList } from "./Sections"
 
 export const Admin = () => {
 
@@ -11,5 +10,6 @@ export const Admin = () => {
         <h1>Welcome {user.username}</h1>
         <EmployeesList />
         <UserCreation />
+        <ProductCreation />
     </div>
 }

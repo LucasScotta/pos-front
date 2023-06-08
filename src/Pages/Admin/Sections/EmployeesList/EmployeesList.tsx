@@ -1,9 +1,9 @@
 import { Fragment, FormEvent } from 'react'
 import { AxiosError } from "axios"
-import { useFetch, useUser } from "../../../Hooks"
-import { generateUrl, serviceMethods, serviceUrls } from "../../../Services"
+import { useFetch, useUser } from "../../../../Hooks"
+import { generateUrl, serviceMethods, serviceUrls } from "../../../../Services"
 import { Navigate } from "react-router-dom"
-import { path } from "../../../helper"
+import { path } from "../../../../helper"
 
 export const EmployeesList = () => {
     const { user: adminUser } = useUser()
