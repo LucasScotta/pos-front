@@ -1,30 +1,7 @@
 import axios from "axios"
-import { serviceUrls } from "../../Services"
-import { getLocalData, setAndPersistData, removeLocalData, localDataTokens } from "../../helper"
+import { requestInterceptor, responseInterceptor } from "./interceptors"
 
-export const jwtInterceptor = () => {
-    axios.interceptors.response.use(response => {
-        const token: string = response.data.token
-        if (token) {
-            setAndPersistData(localDataTokens.jwt, token)
-        }
-        return response
-    },
-        err => Promise.reject(err))
-
-    axios.interceptors.request.use(request => {
-        const token = getLocalData(localDataTokens.jwt, '')
-        const url = request.url
-        const urlIsLogin = url?.toString().includes(serviceUrls.LOGIN)
-        if (!!token) {
-            if (!urlIsLogin) {
-                request.headers.Authorization = `Bearer ${token}`
-                return request
-            }
-        }
-        removeLocalData(localDataTokens.jwt)
-        removeLocalData(localDataTokens.user)
-        return request
-    },
-        err => Promise.reject(err))
+export const jwtInterceptor = async () => {
+    axios.interceptors.response.use(responseInterceptor, err => Promise.reject(err))
+    axios.interceptors.request.use(requestInterceptor, err => Promise.reject(err))
 }
