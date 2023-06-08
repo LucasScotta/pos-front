@@ -1,7 +1,7 @@
 import { FormEvent, useEffect, useState } from "react"
 import { login } from "../../Services"
 import { createUser, resetUser } from "../../Provider/states/user"
-import { useUser } from "../../Hooks/useUser/useUser"
+import { useUser } from "../../Hooks"
 import { useNavigate } from "react-router-dom"
 import { path } from "../../helper"
 

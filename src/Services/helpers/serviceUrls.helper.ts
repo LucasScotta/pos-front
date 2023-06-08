@@ -1,4 +1,4 @@
-import { AxiosServiceMethods } from "../../Models/AxiosServiceMetod"
+import { AxiosServiceMethods } from "../../Models"
 
 export const serviceUrls = {
     BASE: 'http://localhost:8080',

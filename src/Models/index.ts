@@ -1,2 +1,5 @@
 export * from './UserInfo'
 export * from './AppStore'
+export * from './FormComponent'
+export * from './AxiosMethod'
+export * from './AxiosServiceMetod'

@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios"
 import { useEffect, useState } from "react"
-import { AxiosMethod } from "../../Models/AxiosMethod"
+import { AxiosMethod } from "../../Models"
 
 export const useFetch = (url: string, method: AxiosMethod, data: any = {}) => {
     const [resp, setResp] = useState<AxiosResponse>()
