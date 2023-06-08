@@ -4,7 +4,7 @@ import { registerProductInputs } from "./registerProductInputs"
 
 export const ProductCreation = () => {
     const [error, setError] = useState('')
-    const [timeError, setTimeError] = useState<number>()
+    const [timeError, setTimeError] = useState<NodeJS.Timeout>()
     const handleError = (err: string) => {
         clearError()
         setError(err)
@@ -19,12 +19,11 @@ export const ProductCreation = () => {
         const formData = new FormData(form)
         const name = formData.get('name')
         const price = Number(formData.get('price'))
-        const variant = formData.get('variant')
+        // const variant = formData.get('variant')
 
         if (!name || !name.toString().replaceAll(' ', '')) return handleError('Name product is required')
         if (!price || isNaN(price) || price < 0) return handleError('Enter a valid number of products')
 
-        console.log(name, price)
         // TODO => hacer fetch para crear producto
         // Enviar name y price
     }
