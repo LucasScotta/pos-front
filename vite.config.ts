@@ -7,7 +7,7 @@ export default defineConfig({
   define: {
     'process.env': {
       API_PATH: process.env.API_PATH || 'http://localhost',
-      IO_PORT: process.env.IO_PORT || '1234',
+      IO_PORT: process.env.IO_PORT || 3000,
       API_PORT: process.env || '8080'
     },
   }
