@@ -16,7 +16,7 @@ export const ProductEditor = ({ products }: ProductEditorProps) => {
             {
                 products && products.map(product => {
                     const { id, name, price } = product
-                    return <tr key={id}>
+                    return <tr key={name}>
                         <td>{name}</td>
                         <td>{price}</td>
                         <td><button onClick={() => deleteProduct(id)}>X</button></td>

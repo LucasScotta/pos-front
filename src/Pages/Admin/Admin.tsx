@@ -6,7 +6,7 @@ import { AxiosError } from "axios"
 import { Navigate } from "react-router-dom"
 import { path } from "../../helper"
 
-// interface IStoreResponse { users: UserInfo[], products: IProduct[] }
+interface IStoreResponse { users: UserInfo[], products: IProduct[] }
 export const Admin = () => {
 
     const { user } = useUser()
@@ -18,14 +18,13 @@ export const Admin = () => {
     }
 
     if (!user || !resp || loading) return <div>Loading...</div>
-    const { users, products }: { users: UserInfo[], products: IProduct[] } = resp.data
+    const { users, products }: IStoreResponse = resp.data
 
-    // const { users, products }: { users: UserInfo[], products: IProduct[] } = resp?.data
     if (!users || resp.status !== 200) return <div>Something went wrong, please refresh this page</div>
 
     return <div style={{ display: 'flex', flexDirection: 'column', 'alignItems': 'center' }}>
         <h1>Welcome {user.username}</h1>
-        <EmployeesList users={users} />
+        <EmployeesList username={user.username} users={users} />
         <UserCreation />
         <ProductCreation />
         <ProductEditor products={products} />

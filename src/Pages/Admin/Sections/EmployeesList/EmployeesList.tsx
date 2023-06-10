@@ -1,12 +1,12 @@
 import { Fragment } from 'react'
 import { UserInfo } from '../../../../Models'
-interface EmployeesListInterface { users: UserInfo[] }
-export const EmployeesList = ({ users }: EmployeesListInterface) => {
+interface EmployeesListInterface { users: UserInfo[], username: string }
+export const EmployeesList = ({ username, users }: EmployeesListInterface) => {
 
     return <>
         <div>List of Employees and admins:</div>
         <ul style={{ listStyle: 'none', display: 'flex', flexWrap: 'wrap', gap: '4rem', alignItems: 'center' }}>
-            {users.map((user: any) => user.username === user.username ? <Fragment key={user.id}></Fragment>
+            {users.map((user: any) => user.username === username ? <Fragment key={user.id}></Fragment>
                 : <li key={user.id}>
                     <form onSubmit={e => e.preventDefault()}>
                         <div>Name: {user.username}</div>
