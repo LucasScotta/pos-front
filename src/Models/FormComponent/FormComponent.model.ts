@@ -7,6 +7,7 @@ export interface ForminputDataType {
     name: string
     required?: true
     description?: string
+    placeHolder?: string
 }
 export interface FormComponentProps {
     inputs: ForminputDataType[]
