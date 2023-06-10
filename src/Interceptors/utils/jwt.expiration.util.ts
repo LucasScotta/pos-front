@@ -1,9 +1,7 @@
 import { serviceUrls } from "../../Services"
 import { getLocalData, localDataTokens, removeLocalData } from "../../helper"
 
-export const isExpired = () => {
-    return false
-}
+export const isExpired = (exp: number) => exp < Date.now()
 export const isSession = () => {
     const { JWT_TOKEN, exp } = localStorage
     return !!JWT_TOKEN && !!exp

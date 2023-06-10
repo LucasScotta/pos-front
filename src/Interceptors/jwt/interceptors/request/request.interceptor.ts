@@ -13,11 +13,13 @@ export const requestInterceptor = async (request: InternalAxiosRequestConfig) =>
     //TODO: Manage this rejection to show Session error on login form
     if (!isSession()) return Promise.reject({ status: 400, message: 'Token must be provided' })
     const { token, exp } = getSession()
-    if (isExpired()) return Promise.reject({ status: 400, message: 'Token expired' })
-    const tokenStr = `Bearer ${token}`
-    request.headers.Authorization = tokenStr
+    if (isExpired(exp)) {
+        return Promise.reject({ status: 400, message: 'Token expired' })
+    }
+    const tokenHeader = `Bearer ${token}`
+    request.headers.Authorization = tokenHeader
     if (hasToRefresh(exp)) {
-        const headers = { Authorization: tokenStr }
+        const headers = { Authorization: tokenHeader }
         axios.get(refreshPath(), { headers })
     }
     return request
