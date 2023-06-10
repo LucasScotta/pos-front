@@ -27,19 +27,16 @@ export const useSocket = ({ userId, enabled, onConnected, onDisconnected }: Sock
         const socket = io(socketPath)
         socket.emit('auth', userId)
         socket.on('connect', () => {
-            console.log('estoy conectado rey')
             if (onConnected) {
                 onConnected()
             }
         })
         socket.on('tables', tab => setTables(tab))
         socket.on('reconnect', () => {
-            console.log('me estoy re conectando rey')
             socket.emit('auth-me', userId)
         })
         socket.on('disconnect', () => {
             onDisconnected()
-            console.log('me estoy desconectando rey')
         })
         ref.current = socket
     }, [enabled])
