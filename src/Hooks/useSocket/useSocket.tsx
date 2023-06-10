@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from 'react'
 import io, { Socket } from 'socket.io-client';
 import { serviceUrls } from '../../Services';
-import { ITable } from '../../Models';
+import { IProduct, ITable } from '../../Models';
 
 const socketPath = serviceUrls.IO
 interface SocketProps {

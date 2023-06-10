@@ -6,7 +6,7 @@ const iourl = `${API_PATH}:${IO_PORT}`
 
 const apiPath = () => http
 const ioPath = () => iourl
-const refreshPath = () => generateUrl(apiPath(), serviceUrls.REFRESH)
+const refreshPath = () => generateUrl(apiPath(), serviceUrls.LOGIN, serviceUrls.REFRESH)
 
 export const serviceUrls = {
     BASE: apiPath(),
@@ -15,6 +15,7 @@ export const serviceUrls = {
     ADMIN: 'admin',
     EMPLOYEES: 'users',
     REFRESH: 'refresh',
+    CREATE_PRODUCT: 'create/product',
     refreshPath
 }
 

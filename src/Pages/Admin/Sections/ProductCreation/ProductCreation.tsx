@@ -1,34 +1,38 @@
-import { FormEvent, useState } from "react"
+import { FormEvent, useEffect, useState } from "react"
 import { Form } from "../../../../Components"
 import { registerProductInputs } from "./registerProductInputs"
+import { sendProducts } from "../../Services"
+import { useError } from "../../../../Hooks"
 
 export const ProductCreation = () => {
-    const [error, setError] = useState('')
-    const [timeError, setTimeError] = useState<NodeJS.Timeout>()
-    const handleError = (err: string) => {
-        clearError()
-        setError(err)
-        const timeOut = setTimeout(() => setError(''), 3000)
-        setTimeError(timeOut)
-    }
-    const clearError = () => clearInterval(timeError)
-    const createProduct = (e: FormEvent<HTMLFormElement>) => {
+    const { error, setErrorMessage } = useError({ errorMessage: '' })
+
+
+    const createProduct = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
         const form = e.currentTarget
         const formData = new FormData(form)
-        const name = formData.get('name')
-        const price = Number(formData.get('price'))
+        const name = formData.get('name')?.toString()
+        const price = Number(formData.get('price')?.toString())
         // const variant = formData.get('variant')
 
-        if (!name || !name.toString().replaceAll(' ', '')) return handleError('Name product is required')
-        if (!price || isNaN(price) || price < 0) return handleError('Enter a valid number of products')
+        if (!name || !name.toString().replaceAll(' ', '')) return setErrorMessage('Name product is required')
+        if (!price || isNaN(price) || price < 1) return setErrorMessage('Enter a valid number of products')
 
-        // TODO => hacer fetch para crear producto
-        // Enviar name y price
+        // Fetching products
+        const product = { name, price }
+        const added = await sendProducts(product)
+
+        if (added instanceof Error) {
+            const message = added.message.toString()
+            setErrorMessage(message || 'Something went wrong, please try again')
+        }
+        else if (!product) setErrorMessage('Products couldn\'t be recovered')
+        else setErrorMessage('Product added successfuly')
     }
 
-    return (
+    return (<>
         <Form
             onSubmit={createProduct}
             inputs={registerProductInputs}
@@ -36,5 +40,6 @@ export const ProductCreation = () => {
             submitText="Create Product">
             <h3>Register new product</h3>
             {!!error && (<p>{error}</p>)}
-        </Form>)
+        </Form>
+    </>)
 }
