@@ -20,7 +20,7 @@ export const Admin = () => {
     if (!user || !resp || loading) return <div>Loading...</div>
     const { users, products }: IStoreResponse = resp.data
 
-    if (!users || resp.status !== 200) return <div>Something went wrong, please refresh this page</div>
+    if (resp.status !== 200 || !users || !products) return <div>Something went wrong, please refresh this page</div>
 
     return <div style={{ display: 'flex', flexDirection: 'column', 'alignItems': 'center' }}>
         <h1>Welcome {user.username}</h1>

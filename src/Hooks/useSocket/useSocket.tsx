@@ -13,6 +13,7 @@ interface SocketProps {
 export const useSocket = ({ userId, enabled, onConnected, onDisconnected }: SocketProps) => {
     const ref = useRef<Socket>()
     const [tables, setTables] = useState<ITable[]>([])
+    const [products, setProducts] = useState<IProduct[]>([])
 
     const send = (data?: string) => {
         if (!data) return
@@ -25,20 +26,25 @@ export const useSocket = ({ userId, enabled, onConnected, onDisconnected }: Sock
     useEffect(() => {
         if (!enabled) return
         const socket = io(socketPath)
-        socket.emit('auth', userId)
         socket.on('connect', () => {
             if (onConnected) {
                 onConnected()
             }
+            socket.emit('auth', userId)
         })
-        socket.on('tables', tab => setTables(tab))
-        socket.on('reconnect', () => {
-            socket.emit('auth-me', userId)
+        socket.on('update', ({ products, tables }: { products: IProduct[], tables: ITable[] }) => {
+            setProducts(products)
+            setTables(tables)
         })
         socket.on('disconnect', () => {
             onDisconnected()
         })
         ref.current = socket
+        return () => {
+            socket.off('connect')
+            socket.off('auth')
+            socket.off('update')
+        }
     }, [enabled])
-    return { tables, send }
+    return { tables, products, send }
 }
