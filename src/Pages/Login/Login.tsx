@@ -1,13 +1,13 @@
-import { FormEvent, useEffect, useState } from "react"
+import { FormEvent, useEffect } from "react"
 import { login } from "../../Services"
 import { createUser, resetUser } from "../../Provider/states/user"
-import { useUser } from "../../Hooks"
+import { useError, useUser } from "../../Hooks"
 import { useNavigate } from "react-router-dom"
 import { path } from "../../helper"
 
 export const Login = () => {
     const navigate = useNavigate()
-    const [error, setError] = useState('')
+    const { error, setErrorMessage } = useError({ errorMessage: '' })
     const { dispatch } = useUser()
 
     const submit = async (e: FormEvent<HTMLFormElement>) => {
@@ -19,17 +19,17 @@ export const Login = () => {
         const password = formData.get('password')
 
         if (!!username && !!password) {
-            setError('Loging in...')
+            setErrorMessage('Loging in...')
 
             const data = await login(username, password)
             if (data instanceof Error) {
-                return setError(data.message)
+                return setErrorMessage(data.message)
             }
             dispatch(createUser(data))
-            setError("Successfuly loged")
+            setErrorMessage("Successfuly loged")
             return navigate(path.DASHBOARD, { replace: true })
         }
-        setError("Provided credentials are invalids")
+        setErrorMessage("Provided credentials are invalids")
     }
     useEffect(() => {
         dispatch(resetUser())
