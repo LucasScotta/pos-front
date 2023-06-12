@@ -11,7 +11,7 @@ export const useError = ({ errorMessage }: ErrorHookProps) => {
     const setErrorMessage = (message: string) => {
         clearInterval(timeError)
         setError(message)
-        setTimeError(setTimeout(() => setError(''), 3000))
+        setTimeError(setTimeout(() => setError(''), 7000))
     }
     useEffect(() => {
         if (errorMessage) return setErrorMessage(errorMessage)

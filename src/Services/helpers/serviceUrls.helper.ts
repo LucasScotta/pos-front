@@ -13,9 +13,11 @@ export const serviceUrls = {
     IO: ioPath(),
     LOGIN: 'auth',
     ADMIN: 'admin',
-    EMPLOYEES: 'users',
+    USERS: 'users',
     REFRESH: 'refresh',
+    CREATE_USER: 'create/user',
     CREATE_PRODUCT: 'create/product',
+    DELETE_PRODUCT: 'delete/product',
     refreshPath
 }
 

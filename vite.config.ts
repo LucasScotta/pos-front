@@ -6,9 +6,9 @@ export default defineConfig({
   plugins: [react()],
   define: {
     'process.env': {
-      API_PATH: process.env.API_PATH || 'http://localhost',
-      IO_PORT: process.env.IO_PORT || 3000,
-      API_PORT: process.env || '8080'
+      API_PATH: process.env.API_PATH,
+      IO_PORT: process.env.IO_PORT,
+      API_PORT: process.env
     },
   }
 })
